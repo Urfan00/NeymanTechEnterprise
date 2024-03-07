@@ -5,8 +5,9 @@ from .models import Blog, BlogCategory
 
 
 class BlogAdmin(ImportExportModelAdmin):
-    list_display = ['id', 'title', 'slug', 'show_date', 'content', 'original_blog_image', 'compress_blog_image', 'blog_category', 'created_at', 'updated_at']
+    list_display = ['id', 'title', 'slug', 'show_date', 'content', 'is_show', 'original_blog_image', 'compress_blog_image', 'blog_category', 'created_at', 'updated_at']
     list_display_links = ['id', 'title']
+    list_filter = ['is_show']
     search_fields = ['title', 'blog_category__blog_category_title']
 
     def delete_queryset(self, request, queryset):

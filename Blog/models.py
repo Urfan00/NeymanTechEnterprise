@@ -1,4 +1,6 @@
 import os
+import io
+from PIL import Image
 from django.db import models
 from services.mixins import DateMixin
 from ckeditor.fields import RichTextField
@@ -6,8 +8,6 @@ from django.utils.crypto import get_random_string
 from django.template.defaultfilters import slugify
 from services.uploader import Uploader
 from django.core.files.uploadedfile import SimpleUploadedFile
-from PIL import Image
-import io
 
 
 
@@ -46,6 +46,7 @@ class Blog(DateMixin):
     slug = models.SlugField(null=True, blank=True, unique=True)
     show_date = models.DateField()
     content = RichTextField()
+    is_show = models.BooleanField(default=True)
     original_blog_image = models.ImageField(upload_to=Uploader.blog_images_original, max_length=255)
     compress_blog_image = models.ImageField(upload_to=Uploader.blog_images_compress, max_length=255, null=True, blank=True)
     blog_category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, related_name='related_blog_category')

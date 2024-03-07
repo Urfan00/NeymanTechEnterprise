@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from import_export.formats.base_formats import CSV, XLSX
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-zf^f7uxfz&ppi418@t6z$l(=$uilri#0yqtb)n2)lm+)th4o(l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
     'Service',
 
     'rest_framework',
+    'import_export',
+    'ckeditor',
 
 ]
 
@@ -148,3 +151,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+IMPORT_EXPORT_FORMATS = [CSV, XLSX]

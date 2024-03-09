@@ -6,7 +6,7 @@ from .models import FAQ, Partner, Subscribe
 
 
 class FAQAdmin(ImportExportModelAdmin):
-    list_display = ['id', 'faq', 'answer', 'created_at', 'updated_at']
+    list_display = ['id', 'faq', 'answer', 'is_active', 'created_at', 'updated_at']
     list_display_links = ['id', 'faq']
     list_filter = ['is_active']
     search_fields = ['faq']

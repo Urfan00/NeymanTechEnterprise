@@ -4,10 +4,11 @@ from django.conf import settings
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import Project, ProjectAllImage
+from modeltranslation.admin import TranslationAdmin
 
 
 
-class ProjectAdmin(ImportExportModelAdmin):
+class ProjectAdmin(ImportExportModelAdmin, TranslationAdmin):
     list_display = ['id', 'project_title', 'project_slug', 'project_original_image', 'project_compress_image', 'project_link', 'project_is_show', 'service', 'created_at', 'updated_at']
     list_display_links = ['id', 'project_title']
     list_filter = ['project_is_show']

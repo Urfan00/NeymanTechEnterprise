@@ -4,10 +4,11 @@ from django.conf import settings
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import Service, ServiceCard
+from modeltranslation.admin import TranslationAdmin
 
 
 
-class ServiceAdmin(ImportExportModelAdmin):
+class ServiceAdmin(ImportExportModelAdmin, TranslationAdmin):
     list_display = ['id', 'service_title', 'service_slug', 'service_original_icon', 'service_compress_icon', 'description', 'service_is_show', 'created_at', 'updated_at']
     list_display_links = ['id', 'service_title']
     list_filter = ['service_is_show']
@@ -31,7 +32,7 @@ class ServiceAdmin(ImportExportModelAdmin):
         super().delete_queryset(request, queryset)
 
 
-class ServiceCardAdmin(ImportExportModelAdmin):
+class ServiceCardAdmin(ImportExportModelAdmin, TranslationAdmin):
     list_display = ['id', 'service_card_title', 'service_card_content', 'service_card_is_show', 'service', 'created_at', 'updated_at']
     list_display_links = ['id', 'service_card_title']
     list_filter = ['service_card_is_show']

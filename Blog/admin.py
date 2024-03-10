@@ -2,9 +2,10 @@ import os
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import Blog, BlogCategory
+from modeltranslation.admin import TranslationAdmin
 
 
-class BlogAdmin(ImportExportModelAdmin):
+class BlogAdmin(ImportExportModelAdmin, TranslationAdmin):
     list_display = ['id', 'title', 'slug', 'show_date', 'content', 'is_show', 'original_blog_image', 'compress_blog_image', 'blog_category', 'created_at', 'updated_at']
     list_display_links = ['id', 'title']
     list_filter = ['is_show']
@@ -29,7 +30,7 @@ class BlogAdmin(ImportExportModelAdmin):
         super().delete_queryset(request, queryset)
 
 
-class BlogCategoryAdmin(admin.ModelAdmin):
+class BlogCategoryAdmin(ImportExportModelAdmin, TranslationAdmin):
     list_display = ['id', 'blog_category_title', 'is_active', 'created_at', 'updated_at']
     list_display_links = ['id', 'blog_category_title']
     list_filter = ['is_active']

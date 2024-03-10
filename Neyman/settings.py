@@ -34,8 +34,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation', 
     'jazzmin',
-
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'import_export',
     'ckeditor',
+    'rosetta',
 
 ]
 
@@ -136,11 +137,15 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
 LANGUAGES = (
     ('az', 'Azerbaijani'),
     ('en', 'English'),
-    ('ru', 'Russian'),
     ('tr', 'Turkish'),
+    ('ru', 'Russian'),
 )
 
 # Static files (CSS, JavaScript, Images)

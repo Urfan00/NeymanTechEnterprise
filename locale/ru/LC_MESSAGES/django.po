@@ -1,0 +1,305 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-10 21:57+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: .\About\models.py:8 .\Blog\models.py:46
+msgid "title"
+msgstr ""
+
+#: .\About\models.py:9 .\Blog\models.py:49
+msgid "content"
+msgstr ""
+
+#: .\About\models.py:15 .\About\models.py:16
+msgid "Different Us"
+msgstr ""
+
+#: .\About\models.py:20 .\About\models.py:42
+msgid "phone"
+msgstr ""
+
+#: .\About\models.py:26 .\About\models.py:27
+msgid "Phone Number"
+msgstr ""
+
+#: .\About\models.py:31 .\About\models.py:43 .\Core\models.py:25
+msgid "email"
+msgstr ""
+
+#: .\About\models.py:37 .\About\models.py:38
+msgid "Email Address"
+msgstr ""
+
+#: .\About\models.py:45
+msgid "location_name"
+msgstr ""
+
+#: .\About\models.py:46
+msgid "location_url"
+msgstr ""
+
+#: .\About\models.py:48
+msgid "facebook"
+msgstr ""
+
+#: .\About\models.py:49
+msgid "twitter"
+msgstr ""
+
+#: .\About\models.py:50
+msgid "instagram"
+msgstr ""
+
+#: .\About\models.py:51
+msgid "linkedln"
+msgstr ""
+
+#: .\About\models.py:52
+msgid "youtube"
+msgstr ""
+
+#: .\About\models.py:53
+msgid "github"
+msgstr ""
+
+#: .\About\models.py:54
+msgid "tiktok"
+msgstr ""
+
+#: .\About\models.py:55
+msgid "whatsapp"
+msgstr ""
+
+#: .\About\models.py:58 .\About\models.py:59
+msgid "Contact Info"
+msgstr ""
+
+#: .\Account\models.py:7
+msgid "image"
+msgstr ""
+
+#: .\Blog\models.py:16
+msgid "blog_category_title"
+msgstr ""
+
+#: .\Blog\models.py:17 .\Core\models.py:14 .\Core\models.py:26
+#: .\Core\models.py:40
+msgid "is_active"
+msgstr ""
+
+#: .\Blog\models.py:41 .\Blog\models.py:42
+msgid "Blog Category"
+msgstr ""
+
+#: .\Blog\models.py:47
+msgid "slug"
+msgstr ""
+
+#: .\Blog\models.py:48
+msgid "show_date"
+msgstr ""
+
+#: .\Blog\models.py:50 .\Review\models.py:10
+msgid "is_show"
+msgstr ""
+
+#: .\Blog\models.py:51
+msgid "original_blog_image"
+msgstr ""
+
+#: .\Blog\models.py:52
+msgid "compress_blog_image"
+msgstr ""
+
+#: .\Blog\models.py:53
+msgid "blog_category"
+msgstr ""
+
+#: .\Blog\models.py:134 .\Blog\models.py:135
+msgid "Blog"
+msgstr ""
+
+#: .\Core\models.py:12
+msgid "faq"
+msgstr ""
+
+#: .\Core\models.py:13
+msgid "answer"
+msgstr ""
+
+#: .\Core\models.py:20 .\Core\models.py:21
+msgid "FAQ"
+msgstr ""
+
+#: .\Core\models.py:32 .\Core\models.py:33
+msgid "Subscribe"
+msgstr ""
+
+#: .\Core\models.py:37
+msgid "partner_name"
+msgstr ""
+
+#: .\Core\models.py:38
+msgid "original_partner_logo"
+msgstr ""
+
+#: .\Core\models.py:39
+msgid "compress_partner_logo"
+msgstr ""
+
+#: .\Core\models.py:109 .\Core\models.py:110
+msgid "Partner"
+msgstr ""
+
+#: .\Project\models.py:18
+msgid "project_title"
+msgstr ""
+
+#: .\Project\models.py:19
+msgid "project_slug"
+msgstr ""
+
+#: .\Project\models.py:20
+msgid "project_original_image"
+msgstr ""
+
+#: .\Project\models.py:21
+msgid "project_compress_image"
+msgstr ""
+
+#: .\Project\models.py:22
+msgid "project_link"
+msgstr ""
+
+#: .\Project\models.py:23
+msgid "project_is_show"
+msgstr ""
+
+#: .\Project\models.py:24 .\Service\models.py:109
+msgid "service"
+msgstr ""
+
+#: .\Project\models.py:104 .\Project\models.py:105
+msgid "Project"
+msgstr ""
+
+#: .\Project\models.py:109
+msgid "original_image"
+msgstr ""
+
+#: .\Project\models.py:110
+msgid "compress_image"
+msgstr ""
+
+#: .\Project\models.py:111
+msgid "image_is_show"
+msgstr ""
+
+#: .\Project\models.py:112
+msgid "project"
+msgstr ""
+
+#: .\Project\models.py:180 .\Project\models.py:181
+msgid "Project All Image"
+msgstr ""
+
+#: .\Request\models.py:7 .\Review\models.py:7
+msgid "fullname"
+msgstr ""
+
+#: .\Request\models.py:8
+msgid "phone_number"
+msgstr ""
+
+#: .\Request\models.py:9
+msgid "request"
+msgstr ""
+
+#: .\Request\models.py:10
+msgid "company"
+msgstr ""
+
+#: .\Request\models.py:11
+msgid "is_view"
+msgstr ""
+
+#: .\Request\models.py:12
+msgid "admin_comment"
+msgstr ""
+
+#: .\Request\models.py:18 .\Request\models.py:19
+msgid "Website Request"
+msgstr ""
+
+#: .\Review\models.py:8
+msgid "costumer_company"
+msgstr ""
+
+#: .\Review\models.py:9
+msgid "costumer_review"
+msgstr ""
+
+#: .\Review\models.py:16 .\Review\models.py:17
+msgid "Costumer Review"
+msgstr ""
+
+#: .\Service\models.py:16
+msgid "service_title"
+msgstr ""
+
+#: .\Service\models.py:17
+msgid "service_slug"
+msgstr ""
+
+#: .\Service\models.py:18
+msgid "service_original_icon"
+msgstr ""
+
+#: .\Service\models.py:19
+msgid "service_compress_icon"
+msgstr ""
+
+#: .\Service\models.py:20
+msgid "description"
+msgstr ""
+
+#: .\Service\models.py:21
+msgid "service_is_show"
+msgstr ""
+
+#: .\Service\models.py:101 .\Service\models.py:102
+msgid "Service"
+msgstr ""
+
+#: .\Service\models.py:106
+msgid "service_card_title"
+msgstr ""
+
+#: .\Service\models.py:107
+msgid "service_card_content"
+msgstr ""
+
+#: .\Service\models.py:108
+msgid "service_card_is_show"
+msgstr ""
+
+#: .\Service\models.py:115 .\Service\models.py:116
+msgid "Service Card"
+msgstr ""

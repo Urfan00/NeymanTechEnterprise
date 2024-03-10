@@ -5,38 +5,39 @@ from services.uploader import Uploader
 from django.core.files.uploadedfile import SimpleUploadedFile
 from PIL import Image
 import io
+from django.utils.translation import gettext_lazy as _
 
 
 class FAQ(DateMixin):
-    faq = models.CharField(max_length=255, unique=True)
-    answer = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=True)
+    faq = models.CharField(_('faq'), max_length=255, unique=True)
+    answer = models.CharField(_('answer'), max_length=255)
+    is_active = models.BooleanField(_('is_active'), default=True)
 
     def __str__(self):
         return self.faq
 
     class Meta:
-        verbose_name = 'FAQ'
-        verbose_name_plural = 'FAQ'
+        verbose_name = _('FAQ')
+        verbose_name_plural = _('FAQ')
 
 
 class Subscribe(DateMixin):
-    email = models.EmailField(max_length=50, unique=True)
-    is_active = models.BooleanField(default=True)
+    email = models.EmailField(_('email'), max_length=50, unique=True)
+    is_active = models.BooleanField(_('is_active'), default=True)
 
     def __str__(self):
         return self.email
 
     class Meta:
-        verbose_name = 'Subscribe'
-        verbose_name_plural = 'Subscribe'
+        verbose_name = _('Subscribe')
+        verbose_name_plural = _('Subscribe')
 
 
 class Partner(DateMixin):
-    partner_name = models.CharField(max_length=255, unique=True)
-    original_partner_logo = models.ImageField(upload_to=Uploader.partner_logo_original, max_length=255)
-    compress_partner_logo = models.ImageField(upload_to=Uploader.partner_logo_compress, max_length=255, null=True, blank=True)
-    is_active = models.BooleanField(default=True)
+    partner_name = models.CharField(_('partner_name'), max_length=255, unique=True)
+    original_partner_logo = models.ImageField(_('original_partner_logo'), upload_to=Uploader.partner_logo_original, max_length=255)
+    compress_partner_logo = models.ImageField(_('compress_partner_logo'), upload_to=Uploader.partner_logo_compress, max_length=255, null=True, blank=True)
+    is_active = models.BooleanField(_('is_active'), default=True)
 
     def __str__(self):
         return self.partner_name
@@ -105,5 +106,5 @@ class Partner(DateMixin):
         super().delete(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Partner'
-        verbose_name_plural = 'Partner'
+        verbose_name = _('Partner')
+        verbose_name_plural = _('Partner')

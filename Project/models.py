@@ -10,17 +10,18 @@ from django.template.defaultfilters import slugify
 from services.uploader import Uploader
 from django.core.files.uploadedfile import SimpleUploadedFile
 from PIL import Image
+from django.utils.translation import gettext_lazy as _
 
 
 
 class Project(DateMixin):
-    project_title = models.CharField(max_length=255)
-    project_slug = models.SlugField(null=True, blank=True, unique=True)
-    project_original_image = models.ImageField(upload_to=Uploader.project_image_original, max_length=255)
-    project_compress_image = models.ImageField(upload_to=Uploader.project_image_compress, max_length=255, null=True, blank=True)
-    project_link = models.URLField(max_length=255, null=True, blank=True)
-    project_is_show = models.BooleanField(default=True)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='related_service_project')
+    project_title = models.CharField(_('project_title'), max_length=255)
+    project_slug = models.SlugField(_('project_slug'), null=True, blank=True, unique=True)
+    project_original_image = models.ImageField(_('project_original_image'), upload_to=Uploader.project_image_original, max_length=255)
+    project_compress_image = models.ImageField(_('project_compress_image'), upload_to=Uploader.project_image_compress, max_length=255, null=True, blank=True)
+    project_link = models.URLField(_('project_link'), max_length=255, null=True, blank=True)
+    project_is_show = models.BooleanField(_('project_is_show'), default=True)
+    service = models.ForeignKey(Service, verbose_name=_('service'), on_delete=models.CASCADE, related_name='related_service_project')
 
     def __str__(self):
         return self.project_title
@@ -100,15 +101,15 @@ class Project(DateMixin):
         super().delete(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Project'
-        verbose_name_plural = 'Project'
+        verbose_name = _('Project')
+        verbose_name_plural = _('Project')
 
 
 class ProjectAllImage(DateMixin):
-    original_image = models.ImageField(upload_to=Uploader.project_all_images_original, max_length=255)
-    compress_image = models.ImageField(upload_to=Uploader.project_all_images_compress, max_length=255, null=True, blank=True)
-    image_is_show = models.BooleanField(default=True)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='related_image_project')
+    original_image = models.ImageField(_('original_image'), upload_to=Uploader.project_all_images_original, max_length=255)
+    compress_image = models.ImageField(_('compress_image'), upload_to=Uploader.project_all_images_compress, max_length=255, null=True, blank=True)
+    image_is_show = models.BooleanField(_('image_is_show'), default=True)
+    project = models.ForeignKey(Project, verbose_name=_('project'), on_delete=models.CASCADE, related_name='related_image_project')
 
     def __str__(self):
         return f"{self.project.project_title} image {self.pk}"
@@ -176,5 +177,5 @@ class ProjectAllImage(DateMixin):
         super().delete(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Project All Image'
-        verbose_name_plural = 'Project All Image'
+        verbose_name = _('Project All Image')
+        verbose_name_plural = _('Project All Image')

@@ -9,15 +9,16 @@ from django.utils.crypto import get_random_string
 from django.template.defaultfilters import slugify
 from django.core.files.uploadedfile import SimpleUploadedFile
 from PIL import Image
+from django.utils.translation import gettext_lazy as _
 
 
 class Service(DateMixin):
-    service_title = models.CharField(max_length=255)
-    service_slug = models.SlugField(null=True, blank=True, unique=True)
-    service_original_icon = models.ImageField(upload_to=Uploader.service_icon_original, max_length=255)
-    service_compress_icon = models.ImageField(upload_to=Uploader.service_icon_compress, max_length=255, null=True, blank=True)
-    description = models.TextField()
-    service_is_show = models.BooleanField(default=True)
+    service_title = models.CharField(_('service_title'), max_length=255)
+    service_slug = models.SlugField(_('service_slug'), null=True, blank=True, unique=True)
+    service_original_icon = models.ImageField(_('service_original_icon'), upload_to=Uploader.service_icon_original, max_length=255)
+    service_compress_icon = models.ImageField(_('service_compress_icon'), upload_to=Uploader.service_icon_compress, max_length=255, null=True, blank=True)
+    description = models.TextField(_('description'), )
+    service_is_show = models.BooleanField(_('service_is_show'), default=True)
 
     def __str__(self):
         return self.service_title
@@ -97,19 +98,19 @@ class Service(DateMixin):
         super().delete(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Service'
-        verbose_name_plural = 'Service'
+        verbose_name = _('Service')
+        verbose_name_plural = _('Service')
 
 
 class ServiceCard(DateMixin):
-    service_card_title = models.CharField(max_length=255)
-    service_card_content = models.TextField()
-    service_card_is_show = models.BooleanField(default=True)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='related_service')
+    service_card_title = models.CharField(_('service_card_title'), max_length=255)
+    service_card_content = models.TextField(_('service_card_content'), )
+    service_card_is_show = models.BooleanField(_('service_card_is_show'), default=True)
+    service = models.ForeignKey(Service, verbose_name=_('service'), on_delete=models.CASCADE, related_name='related_service')
 
     def __str__(self):
         return self.service_card_title
 
     class Meta:
-        verbose_name = 'Service Card'
-        verbose_name_plural = 'Service Card'
+        verbose_name = _('Service Card')
+        verbose_name_plural = _('Service Card')

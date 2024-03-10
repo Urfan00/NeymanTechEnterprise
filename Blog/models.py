@@ -8,12 +8,13 @@ from django.utils.crypto import get_random_string
 from django.template.defaultfilters import slugify
 from services.uploader import Uploader
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.utils.translation import gettext_lazy as _
 
 
 
 class BlogCategory(DateMixin):
-    blog_category_title = models.CharField(max_length=50)
-    is_active = models.BooleanField(default=True)
+    blog_category_title = models.CharField(_('blog_category_title'), max_length=50)
+    is_active = models.BooleanField(_('is_active'), default=True)
 
     def delete(self, *args, **kwargs):
         # Delete related blog images
@@ -37,19 +38,19 @@ class BlogCategory(DateMixin):
         return self.blog_category_title
 
     class Meta:
-        verbose_name = 'Blog Category'
-        verbose_name_plural = 'Blog Category'
+        verbose_name = _('Blog Category')
+        verbose_name_plural = _('Blog Category')
 
 
 class Blog(DateMixin):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(null=True, blank=True, unique=True)
-    show_date = models.DateField()
-    content = RichTextField()
-    is_show = models.BooleanField(default=True)
-    original_blog_image = models.ImageField(upload_to=Uploader.blog_images_original, max_length=255)
-    compress_blog_image = models.ImageField(upload_to=Uploader.blog_images_compress, max_length=255, null=True, blank=True)
-    blog_category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, related_name='related_blog_category')
+    title = models.CharField(_('title'), max_length=255)
+    slug = models.SlugField(_('slug'), null=True, blank=True, unique=True)
+    show_date = models.DateField(_('show_date'), )
+    content = RichTextField(_('content'), )
+    is_show = models.BooleanField(_('is_show'), default=True)
+    original_blog_image = models.ImageField(_('original_blog_image'), upload_to=Uploader.blog_images_original, max_length=255)
+    compress_blog_image = models.ImageField(_('compress_blog_image'), upload_to=Uploader.blog_images_compress, max_length=255, null=True, blank=True)
+    blog_category = models.ForeignKey(BlogCategory, verbose_name=_('blog_category'), on_delete=models.CASCADE, related_name='related_blog_category')
 
     def __str__(self):
         return self.title
@@ -130,5 +131,5 @@ class Blog(DateMixin):
         super().delete(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Blog'
-        verbose_name_plural = 'Blog'
+        verbose_name = _('Blog')
+        verbose_name_plural = _('Blog')

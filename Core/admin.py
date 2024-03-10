@@ -2,10 +2,11 @@ import os
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import FAQ, Partner, Subscribe
+from modeltranslation.admin import TranslationAdmin
 
 
 
-class FAQAdmin(ImportExportModelAdmin):
+class FAQAdmin(ImportExportModelAdmin, TranslationAdmin):
     list_display = ['id', 'faq', 'answer', 'is_active', 'created_at', 'updated_at']
     list_display_links = ['id', 'faq']
     list_filter = ['is_active']

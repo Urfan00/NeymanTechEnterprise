@@ -9,6 +9,13 @@ from modeltranslation.admin import TranslationAdmin
 
 
 class ProjectAdmin(ImportExportModelAdmin, TranslationAdmin):
+    fieldsets = (
+        ('EN', {'fields': ('project_title_en', 'project_slug_en')}),  # English fields
+        ('AZ', {'fields': ('project_title_az', 'project_slug_az')}),  # Azerbaijani fields
+        ('TR', {'fields': ('project_title_tr', 'project_slug_tr')}),  # Turkish fields
+        ('RU', {'fields': ('project_title_ru', 'project_slug_ru')}),  # Russian fields
+        ('Additional', {'fields': ('project_original_image', 'project_compress_image', 'project_link', 'project_is_show', 'service')}),  # Non-translated fields
+    )
     list_display = ['id', 'project_title', 'project_slug', 'project_original_image', 'project_compress_image', 'project_link', 'project_is_show', 'service', 'created_at', 'updated_at']
     list_display_links = ['id', 'project_title']
     list_filter = ['project_is_show']

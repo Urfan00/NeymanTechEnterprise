@@ -7,6 +7,13 @@ from modeltranslation.admin import TranslationAdmin
 
 
 class FAQAdmin(ImportExportModelAdmin, TranslationAdmin):
+    fieldsets = (
+        ('EN', {'fields': ('faq_en', 'answer_en')}),  # English fields
+        ('AZ', {'fields': ('faq_az', 'answer_az')}),  # Azerbaijani fields
+        ('TR', {'fields': ('faq_tr', 'answer_tr')}),  # Turkish fields
+        ('RU', {'fields': ('faq_ru', 'answer_ru')}),  # Russian fields
+        ('Additional', {'fields': ('is_active', )}),  # Non-translated fields
+    )
     list_display = ['id', 'faq', 'answer', 'is_active', 'created_at', 'updated_at']
     list_display_links = ['id', 'faq']
     list_filter = ['is_active']

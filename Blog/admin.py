@@ -5,7 +5,15 @@ from .models import Blog, BlogCategory
 from modeltranslation.admin import TranslationAdmin
 
 
+
 class BlogAdmin(ImportExportModelAdmin, TranslationAdmin):
+    fieldsets = (
+        ('EN', {'fields': ('title_en', 'slug_en', 'content_en')}),  # English fields
+        ('AZ', {'fields': ('title_az', 'slug_az', 'content_az')}),  # Azerbaijani fields
+        ('TR', {'fields': ('title_tr', 'slug_tr', 'content_tr')}),  # Turkish fields
+        ('RU', {'fields': ('title_ru', 'slug_ru', 'content_ru')}),  # Russian fields
+        ('Additional', {'fields': ('show_date', 'is_show', 'blog_category', 'original_blog_image', 'compress_blog_image')}),  # Non-translated fields
+    )
     list_display = ['id', 'title', 'slug', 'show_date', 'content', 'is_show', 'original_blog_image', 'compress_blog_image', 'blog_category', 'created_at', 'updated_at']
     list_display_links = ['id', 'title']
     list_filter = ['is_show']

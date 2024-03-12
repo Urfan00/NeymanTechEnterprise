@@ -52,7 +52,7 @@ class ContactInfo(DateMixin):
     youtube = models.URLField(_('youtube'), max_length=200, null=True, blank=True)
     github = models.URLField(_('github'), max_length=200, null=True, blank=True)
     tiktok = models.URLField(_('tiktok'), max_length=200, null=True, blank=True)
-    whatsapp = models.URLField(_('whatsapp'), max_length=12, null=True, blank=True)
+    whatsapp = models.CharField(_('whatsapp'), max_length=12, null=True, blank=True)
 
     class Meta:
         verbose_name = _('Contact Info')

@@ -11,6 +11,7 @@ from services.uploader import Uploader
 from django.core.files.uploadedfile import SimpleUploadedFile
 from PIL import Image
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.utils import build_localized_fieldname
 
 
 
@@ -75,13 +76,31 @@ class Project(DateMixin):
                     if old_instance.project_compress_image and os.path.isfile(old_instance.project_compress_image.path):
                         os.remove(old_instance.project_compress_image.path)
 
-        self.project_slug = slugify(self.project_title)
+        # Generate and save the slug for the default language
+        if not self.project_slug:
+            self.project_slug = slugify(self.project_title)
 
-        while Project.objects.filter(project_slug=self.project_slug).exclude(pk=self.pk).exists():
-            # Generate a unique slug by adding a suffix
+            # Ensure uniqueness of the slug
             suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+            while Project.objects.filter(project_slug=self.project_slug + suffix).exclude(pk=self.pk).exists():
+                suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
             self.project_slug = f"{self.project_slug}-{suffix}"
-        
+
+        # Generate and save the slugs for other languages
+        for lang_code, _ in settings.LANGUAGES:
+            if lang_code != settings.LANGUAGE_CODE:
+                title_field = build_localized_fieldname('project_title', lang_code)
+                if hasattr(self, title_field) and not getattr(self, f'project_slug_{lang_code}'):
+                    title_value = getattr(self, title_field)
+                    if title_value:
+                        project_slug = slugify(title_value)
+
+                        # Ensure uniqueness of the slug
+                        suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+                        while Project.objects.filter(**{f'project_slug_{lang_code}': project_slug + suffix}).exclude(pk=self.pk).exists():
+                            suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+                        setattr(self, f'project_slug_{lang_code}', f"{project_slug}-{suffix}")
+
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):

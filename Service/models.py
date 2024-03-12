@@ -10,6 +10,8 @@ from django.template.defaultfilters import slugify
 from django.core.files.uploadedfile import SimpleUploadedFile
 from PIL import Image
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.utils import build_localized_fieldname
+
 
 
 class Service(DateMixin):
@@ -72,12 +74,30 @@ class Service(DateMixin):
                     if old_instance.service_compress_icon and os.path.isfile(old_instance.service_compress_icon.path):
                         os.remove(old_instance.service_compress_icon.path)
 
-        self.service_slug = slugify(self.service_title)
+        # Generate and save the slug for the default language
+        if not self.service_slug:
+            self.service_slug = slugify(self.service_title)
 
-        while Service.objects.filter(service_slug=self.service_slug).exclude(pk=self.pk).exists():
-            # Generate a unique slug by adding a suffix
+            # Ensure uniqueness of the slug
             suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+            while Service.objects.filter(service_slug=self.service_slug + suffix).exclude(pk=self.pk).exists():
+                suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
             self.service_slug = f"{self.service_slug}-{suffix}"
+
+        # Generate and save the slugs for other languages
+        for lang_code, _ in settings.LANGUAGES:
+            if lang_code != settings.LANGUAGE_CODE:
+                title_field = build_localized_fieldname('service_title', lang_code)
+                if hasattr(self, title_field) and not getattr(self, f'service_slug_{lang_code}'):
+                    title_value = getattr(self, title_field)
+                    if title_value:
+                        service_slug = slugify(title_value)
+
+                        # Ensure uniqueness of the slug
+                        suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+                        while Service.objects.filter(**{f'service_slug_{lang_code}': service_slug + suffix}).exclude(pk=self.pk).exists():
+                            suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+                        setattr(self, f'service_slug_{lang_code}', f"{service_slug}-{suffix}")
 
         super().save(*args, **kwargs)
 

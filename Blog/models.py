@@ -9,6 +9,8 @@ from django.template.defaultfilters import slugify
 from services.uploader import Uploader
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.utils import build_localized_fieldname
+from django.conf import settings
 
 
 
@@ -104,13 +106,31 @@ class Blog(DateMixin):
                     if old_instance.compress_blog_image and os.path.isfile(old_instance.compress_blog_image.path):
                         os.remove(old_instance.compress_blog_image.path)
 
-        self.slug = slugify(self.title)
+        # Generate and save the slug for the default language
+        if not self.slug:
+            self.slug = slugify(self.title)
 
-        while Blog.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
-            # Generate a unique slug by adding a suffix
+            # Ensure uniqueness of the slug
             suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+            while Blog.objects.filter(slug=self.slug + suffix).exclude(pk=self.pk).exists():
+                suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
             self.slug = f"{self.slug}-{suffix}"
-        
+
+        # Generate and save the slugs for other languages
+        for lang_code, _ in settings.LANGUAGES:
+            if lang_code != settings.LANGUAGE_CODE:
+                title_field = build_localized_fieldname('title', lang_code)
+                if hasattr(self, title_field) and not getattr(self, f'slug_{lang_code}'):
+                    title_value = getattr(self, title_field)
+                    if title_value:
+                        slug = slugify(title_value)
+
+                        # Ensure uniqueness of the slug
+                        suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+                        while Blog.objects.filter(**{f'slug_{lang_code}': slug + suffix}).exclude(pk=self.pk).exists():
+                            suffix = get_random_string(length=4, allowed_chars='0123456789abcdefghijklmnopqrstuvwxyz')
+                        setattr(self, f'slug_{lang_code}', f"{slug}-{suffix}")
+
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):

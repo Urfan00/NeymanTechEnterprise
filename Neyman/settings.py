@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'Service',
 
     'rest_framework',
+    'django_filters',
     'import_export',
     'ckeditor',
     'rosetta',
@@ -142,8 +143,8 @@ LOCALE_PATHS = (
 )
 
 LANGUAGES = (
-    ('az', 'Azerbaijani'),
     ('en', 'English'),
+    ('az', 'Azerbaijani'),
     ('tr', 'Turkish'),
     ('ru', 'Russian'),
 )

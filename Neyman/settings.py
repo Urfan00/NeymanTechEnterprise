@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zf^f7uxfz&ppi418@t6z$l(=$uilri#0yqtb)n2)lm+)th4o(l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -98,12 +98,12 @@ WSGI_APPLICATION = 'Neyman.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'neymantech',
-        'USER': 'postgres',
-        'PASSWORD': '123456789',
-        'HOST': 'localhost',
-        'PORT': 5432
+        'USER': 'root',
+        'PASSWORD': 'root123',
+        'HOST': 'db',
+        'PORT': '5432'
     }
 }
 

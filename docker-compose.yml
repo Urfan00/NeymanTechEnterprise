@@ -49,8 +49,8 @@ services:
        - ./data/pgadmin2:/var/lib/pgadmin
 
 
-volumes:
-  pgdb:
-    external: true
-  pgadmin2:
-    external: true
+# volumes:
+#   pgdb:
+#     external: true
+#   pgadmin2:
+#     external: true

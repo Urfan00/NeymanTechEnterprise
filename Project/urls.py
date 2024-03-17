@@ -11,7 +11,7 @@ from .views import (
 urlpatterns = [
     # Project URLs
     path('projects/', ProjectListCreateAPIView.as_view(), name='project_list_create'),
-    path('projects/<int:pk>/', ProjectRetrieveUpdateDestroyAPIView.as_view(), name='project_detail'),
+    path('projects/<slug:project_slug>/', ProjectRetrieveUpdateDestroyAPIView.as_view(), name='project_detail'),
 
     # Project All Image URLs
     path('project_all_images/', ProjectAllImageListCreateAPIView.as_view(), name='project_all_image_list_create'),

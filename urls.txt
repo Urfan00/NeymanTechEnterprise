@@ -1,0 +1,62 @@
+en / az / tr / ru --> dillər
+
+# About urls
+
+1. http://167.99.138.59/en/different_us/ --> Bizim Fərqimiz ümumi list (get & post)
+2. http://167.99.138.59/en/different_us/{id} --> Bizim Fərqimiz detail (get & put & patch & delete)
+
+3. http://167.99.138.59/en/phone_number/ --> telefon nömrələri ümumi list (get & post)
+4. http://167.99.138.59/en/phone_number/{id} --> telefon nömrəsi detail (get & put & patch & delete)
+
+5. http://167.99.138.59/en/email_address/ --> Email ümumi list (get & post)
+6. http://167.99.138.59/en/email_address/{id} --> Email detail (get & put & patch & delete)
+
+7. http://167.99.138.59/en/contact_info/ --> Əlaqə məlumatları ümumi list (get & post)
+8. http://167.99.138.59/en/contact_info/{id} --> Əlaqə məlumatları detail (get & put & patch & delete)
+
+
+# Blog
+
+9. http://167.99.138.59/en/blog_category/ --> Blog Kateqoriya ümumi list (get & post)
+10. http://167.99.138.59/en/blog_category/{id} --> Blog Kateqoriya detail (get & put & patch & delete)
+
+11. http://167.99.138.59/en/blog/ --> Blog ümumi list (get & post)
+12. http://167.99.138.59/en/blog/{slug} --> Blog detail (get & put & patch & delete)
+
+
+# Core
+
+13. http://167.99.138.59/en/faq/ --> FAQ ümumi list (get & post)
+14. http://167.99.138.59/en/faq/{id} --> FAQ detail (get & put & patch & delete)
+
+15. http://167.99.138.59/en/subscribe/ --> Subscribe ümumi list (get & post)
+16. http://167.99.138.59/en/subscribe/{id} --> Subscribe detail (get & put & patch & delete)
+
+17. http://167.99.138.59/en/partner/ --> PARTNYORLAR ümumi list (get & post)
+18. http://167.99.138.59/en/partner/{id} --> PARTNYOR detail (get & put & patch & delete)
+
+
+# Project
+19. http://167.99.138.59/en/projects/ --> Layihələr ümumi list (get & post)
+20. http://167.99.138.59/en/projects/{project_slug} --> Layihələr detail (get & put & patch & delete)
+
+21. http://167.99.138.59/en/project_all_images/ --> Layihələr bütün şəkillərinin ümumi list (get & post)
+22. http://167.99.138.59/en/project_all_images/{id} --> Layihə şəklinin detail (get & put & patch & delete)
+
+
+# Request
+23. http://167.99.138.59/en/website_requests/ --> Göndərilən sorğuların ümumi list (get & post)
+24. http://167.99.138.59/en/website_requests/{id} --> Göndərilən sorğu detail (get & put & patch & delete)
+
+
+# Review
+25. http://167.99.138.59/en/costumer_reviews/ --> MÜŞTƏRİLƏRİMİZİN RƏYLƏRİ ümumi list (get & post)
+26. http://167.99.138.59/en/costumer_reviews/{id} --> MÜŞTƏRİLƏRİMİZİN RƏY detail (get & put & patch & delete)
+
+
+# Service
+27. http://167.99.138.59/en/services/ --> Servislər ümumi list (get & post)
+28. http://167.99.138.59/en/services/{service_slug} --> Servis detail (get & put & patch & delete)
+
+29. http://167.99.138.59/en/service_cards/ --> Servislər ümumi list (get & post)
+30. http://167.99.138.59/en/service_cards/{id} --> Servis detail (get & put & patch & delete)

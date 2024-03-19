@@ -58,13 +58,15 @@ INSTALLED_APPS = [
     'import_export',
     'ckeditor',
     'rosetta',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.locale.LocaleMiddleware", # language
+    "corsheaders.middleware.CorsMiddleware", #new Corsheader
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -178,3 +180,9 @@ JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 JAZZMIN_UI_TWEAKS =JAZZMIN_UI_TWEAKS
 
 AUTH_USER_MODEL = 'Account.User'
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+]
+
+# CORS_ALLOW_ALL_ORIGINS = True

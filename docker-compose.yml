@@ -41,8 +41,8 @@ services:
     image: dpage/pgadmin4:7.1
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: "root@root.com"
-      PGADMIN_DEFAULT_PASSWORD: "root"
+      PGADMIN_DEFAULT_EMAIL: "info@neymantech.com"
+      PGADMIN_DEFAULT_PASSWORD: "Neyman0Tech"
     ports:
       - 5050:80
     volumes:

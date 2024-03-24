@@ -1,4 +1,6 @@
 import os
+import shutil
+from django.conf import settings
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import FAQ, Partner, Subscribe
@@ -35,18 +37,17 @@ class PartnerAdmin(ImportExportModelAdmin):
 
     def delete_queryset(self, request, queryset):
         for obj in queryset:
-            # Delete the images associated with each blog instance
-            if obj.original_partner_logo:
-                storage, path = obj.original_partner_logo.storage, obj.original_partner_logo.path
-                storage.delete(path)
-                folder_path = os.path.dirname(path)
-                os.rmdir(folder_path)  # Delete the folder
+            # Get the paths to the original and compressed blog folders
+            original_blog_folder = os.path.join(settings.MEDIA_ROOT, 'Original-Image', 'Partner', obj.partner_name)
+            compress_blog_folder = os.path.join(settings.MEDIA_ROOT, 'Compress-Image', 'Partner', obj.partner_name)
 
-            if obj.compress_partner_logo:
-                storage, path = obj.compress_partner_logo.storage, obj.compress_partner_logo.path
-                storage.delete(path)
-                folder_path = os.path.dirname(path)
-                os.rmdir(folder_path)  # Delete the folder
+            # Delete the original blog folder and its contents
+            if os.path.exists(original_blog_folder):
+                shutil.rmtree(original_blog_folder)
+
+            # Delete the compressed blog folder and its contents
+            if os.path.exists(compress_blog_folder):
+                shutil.rmtree(compress_blog_folder)
 
         # Call the delete_queryset method of the parent class
         super().delete_queryset(request, queryset)

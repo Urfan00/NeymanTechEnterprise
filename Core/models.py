@@ -1,4 +1,6 @@
 import os
+import shutil
+from django.conf import settings
 from django.db import models
 from services.mixins import DateMixin
 from services.uploader import Uploader
@@ -9,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class FAQ(DateMixin):
-    faq = models.CharField(_('faq'), max_length=255, unique=True)
-    answer = models.CharField(_('answer'), max_length=255)
+    faq = models.CharField(_('faq'), max_length=300, unique=True)
+    answer = models.CharField(_('answer'), max_length=300)
     is_active = models.BooleanField(_('is_active'), default=True)
 
     def __str__(self):
@@ -89,20 +91,18 @@ class Partner(DateMixin):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        # Delete the images associated with the blog instance
-        if self.original_partner_logo:
-            storage, path = self.original_partner_logo.storage, self.original_partner_logo.path
-            storage.delete(path)
-            folder_path = os.path.dirname(path)
-            os.rmdir(folder_path)  # Delete the folder
+        # Get the paths to the original and compressed blog folders
+        original_blog_category_folder = os.path.join(settings.MEDIA_ROOT, 'Original-Image', 'Partner', self.partner_name)
+        compress_blog_category_folder = os.path.join(settings.MEDIA_ROOT, 'Compress-Image', 'Partner', self.partner_name)
 
-        if self.compress_partner_logo:
-            storage, path = self.compress_partner_logo.storage, self.compress_partner_logo.path
-            storage.delete(path)
-            folder_path = os.path.dirname(path)
-            os.rmdir(folder_path)  # Delete the folder
+        # Delete the original blog folder and its contents
+        if os.path.exists(original_blog_category_folder):
+            shutil.rmtree(original_blog_category_folder)
 
-        # Call the delete method of the parent class
+        # Delete the compressed blog folder and its contents
+        if os.path.exists(compress_blog_category_folder):
+            shutil.rmtree(compress_blog_category_folder)
+
         super().delete(*args, **kwargs)
 
     class Meta:

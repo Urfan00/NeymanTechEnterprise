@@ -6,11 +6,11 @@ class Uploader:
     # BLOG IMAGES
     @staticmethod
     def blog_images_original(instance, filename):
-        return f"Original-Image/Blog/{instance.title}/{filename}"
+        return f"Original-Image/Blog/{instance.blog_category.blog_category_title}/{instance.title}/{filename}"
 
     @staticmethod
     def blog_images_compress(instance, filename):
-        return f"Compress-Image/Blog/{instance.title}/{filename}"
+        return f"Compress-Image/Blog/{instance.blog_category.blog_category_title}/{instance.title}/{filename}"
 
     # PARTNER IMAGES
     @staticmethod

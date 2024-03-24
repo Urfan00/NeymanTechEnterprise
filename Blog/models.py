@@ -1,5 +1,6 @@
 import os
 import io
+import shutil
 from PIL import Image
 from django.db import models
 from services.mixins import DateMixin
@@ -19,21 +20,18 @@ class BlogCategory(DateMixin):
     is_active = models.BooleanField(_('is_active'), default=True)
 
     def delete(self, *args, **kwargs):
-        # Delete related blog images
-        for blog in self.related_blog_category.all():
-            if blog.original_blog_image:
-                storage, path = blog.original_blog_image.storage, blog.original_blog_image.path
-                storage.delete(path)
-                folder_path = os.path.dirname(path)
-                os.rmdir(folder_path)  # Delete the folder
+        # Get the paths to the original and compressed blog folders
+        original_blog_category_folder = os.path.join(settings.MEDIA_ROOT, 'Original-Image', 'Blog', self.blog_category_title)
+        compress_blog_category_folder = os.path.join(settings.MEDIA_ROOT, 'Compress-Image', 'Blog', self.blog_category_title)
 
-            if blog.compress_blog_image:
-                storage, path = blog.compress_blog_image.storage, blog.compress_blog_image.path
-                storage.delete(path)
-                folder_path = os.path.dirname(path)
-                os.rmdir(folder_path)  # Delete the folder
+        # Delete the original blog folder and its contents
+        if os.path.exists(original_blog_category_folder):
+            shutil.rmtree(original_blog_category_folder)
 
-        # Call the delete method of the parent class
+        # Delete the compressed blog folder and its contents
+        if os.path.exists(compress_blog_category_folder):
+            shutil.rmtree(compress_blog_category_folder)
+
         super().delete(*args, **kwargs)
 
     def __str__(self):
@@ -134,20 +132,18 @@ class Blog(DateMixin):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        # Delete the images associated with the blog instance
-        if self.original_blog_image:
-            storage, path = self.original_blog_image.storage, self.original_blog_image.path
-            storage.delete(path)
-            folder_path = os.path.dirname(path)
-            os.rmdir(folder_path)  # Delete the folder
+        # Get the paths to the original and compressed blog folders
+        original_blog_folder = os.path.join(settings.MEDIA_ROOT, 'Original-Image', 'Blog', self.blog_category.blog_category_title, self.title)
+        compress_blog_folder = os.path.join(settings.MEDIA_ROOT, 'Compress-Image', 'Blog', self.blog_category.blog_category_title, self.title)
 
-        if self.compress_blog_image:
-            storage, path = self.compress_blog_image.storage, self.compress_blog_image.path
-            storage.delete(path)
-            folder_path = os.path.dirname(path)
-            os.rmdir(folder_path)  # Delete the folder
+        # Delete the original blog folder and its contents
+        if os.path.exists(original_blog_folder):
+            shutil.rmtree(original_blog_folder)
 
-        # Call the delete method of the parent class
+        # Delete the compressed blog folder and its contents
+        if os.path.exists(compress_blog_folder):
+            shutil.rmtree(compress_blog_folder)
+
         super().delete(*args, **kwargs)
 
     class Meta:

@@ -30,6 +30,15 @@ class Uploader:
     def service_icon_compress(instance, filename):
         return f"Compress-Image/Service/{instance.service_title}/{filename}"
 
+    # COSTUMER IMAGE
+    @staticmethod
+    def costumer_image_original(instance, filename):
+        return f"Original-Image/Costumer-Image/{instance.fullname}/{filename}"
+
+    @staticmethod
+    def costumer_image_compress(instance, filename):
+        return f"Compress-Image/Costumer-Image/{instance.fullname}/{filename}"
+
     # PROJECT IMAGES
     @staticmethod
     def project_image_original(instance, filename):
@@ -47,5 +56,3 @@ class Uploader:
     @staticmethod
     def project_all_images_compress(instance, filename):
         return f"Compress-Image/Service/{instance.project.service.service_title}/Project-Image/{instance.project.project_title}/ALL-Images/{filename}"
-
-
